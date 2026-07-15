@@ -1,0 +1,18 @@
+{
+  "version": "1.2",
+  "product": "ShelOptim",
+  "modules": [
+    "ShelOptimCore.dll",
+    "ShelOptimTools.dll",
+    "ShelOptimNet.dll",
+    "ShelOptimSys.dll",
+    "ShelOptimReg.dll",
+    "ShelOptimFs.dll"
+  ],
+  "helpers": {
+    "ps": "helpers/ps",
+    "cmd": "helpers/cmd",
+    "reg": "helpers/reg"
+  },
+  "notes": "No kernel .sys drivers. User-mode modules only."
+}

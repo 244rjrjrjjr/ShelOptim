@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ShelOptim — Инструкция</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "Segoe UI", system-ui, sans-serif;
+    background: #0a0a0c; color: #e8e8ec; line-height: 1.55;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { color: #4d9fff; font-size: 1.75rem; margin: 0 0 8px; }
+  h2 { color: #6eb0ff; font-size: 1.15rem; margin: 28px 0 10px; border-bottom: 1px solid #222; padding-bottom: 6px; }
+  .sub { color: #888; margin-bottom: 24px; }
+  .card {
+    background: #121218; border: 1px solid #2a2a35; border-radius: 10px;
+    padding: 16px 18px; margin: 12px 0;
+  }
+  .warn { border-left: 4px solid #e0a020; }
+  .ok { border-left: 4px solid #4d9fff; }
+  .bad { border-left: 4px solid #d05050; }
+  ul { padding-left: 1.2rem; }
+  li { margin: 6px 0; }
+  code { background: #1c1c28; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  .step { display: flex; gap: 12px; margin: 10px 0; align-items: flex-start; }
+  .num {
+    min-width: 28px; height: 28px; border-radius: 50%;
+    background: #1a3a6a; color: #7eb6ff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #222; }
+  th { color: #6eb0ff; }
+  footer { margin-top: 40px; color: #666; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ShelOptim — как пользоваться</h1>
+  <p class="sub">Краткая инструкция. Прочитайте до конца, затем вернитесь в программу и отметьте шаги.</p>
+
+  <div class="card warn">
+    <strong>Важно.</strong> Запускайте ShelOptim <strong>от имени администратора</strong>.
+    Без прав админа часть функций (службы, DNS, debloat, жёсткое удаление) не сработает.
+  </div>
+
+  <h2>1. Что это за программа</h2>
+  <div class="card ok">
+    Portable-оптимизатор Windows: очистка, автозагрузка, службы, debloat, Game Mode,
+    диски, приватность, сеть, отчёт и планировщик. Рядом с exe лежат данные в папке
+    <code>ShelOptimData</code> и DLL <code>ShelOptimCore.dll</code>.
+  </div>
+
+  <h2>2. Файлы рядом с программой</h2>
+  <table>
+    <tr><th>Файл</th><th>Зачем</th></tr>
+    <tr><td><code>ShelOptim.exe</code></td><td>Основная программа</td></tr>
+    <tr><td><code>ShelOptimCore.dll</code></td><td>Помогает удалять «занятые» файлы (права, Restart Manager, отложенное удаление)</td></tr>
+    <tr><td><code>ShelOptimData\</code></td><td>Логи, бэкапы, флаг «инструкция пройдена»</td></tr>
+    <tr><td><code>guide.html</code></td><td>Эта инструкция</td></tr>
+  </table>
+
+  <h2>3. Разделы меню</h2>
+  <table>
+    <tr><th>Раздел</th><th>Что делает</th></tr>
+    <tr><td>Dashboard</td><td>Обзор и быстрые действия</td></tr>
+    <tr><td>Cleaner</td><td>Очистка temp, кэшей, Prefetch. Сначала Dry-run</td></tr>
+    <tr><td>Автозагрузка</td><td>Вкл/выкл программ при старте Windows</td></tr>
+    <tr><td>Службы</td><td>Безопасные пресеты (с бэкапом)</td></tr>
+    <tr><td>Debloat</td><td>Удаление лишних UWP / рекламы в Пуске</td></tr>
+    <tr><td>Game Mode</td><td>Закрыть фон, план питания, DVR</td></tr>
+    <tr><td>Диски</td><td>Место на дисках, гибернация</td></tr>
+    <tr><td>Приватность</td><td>Телеметрия и связанные настройки</td></tr>
+    <tr><td>Сеть</td><td>DNS, flush, winsock (осторожно)</td></tr>
+    <tr><td>Отчёт</td><td>Снимок системы в TXT/HTML</td></tr>
+    <tr><td>Планировщик</td><td>Автоочистка по расписанию</td></tr>
+  </table>
+
+  <h2>4. Как безопасно чистить</h2>
+  <div class="step"><div class="num">1</div><div>Откройте <strong>Cleaner</strong></div></div>
+  <div class="step"><div class="num">2</div><div>Нажмите <strong>Сканировать</strong></div></div>
+  <div class="step"><div class="num">3</div><div>Включите <strong>Dry-run</strong> и оцените объём</div></div>
+  <div class="step"><div class="num">4</div><div>Снимите Dry-run и очистите только нужные пункты</div></div>
+  <div class="card bad">
+    <strong>Не удаляйте</strong> системные папки вне списка Cleaner. ShelOptimCore может
+    запланировать удаление «залипших» файлов после перезагрузки — это нормально.
+  </div>
+
+  <h2>5. Службы и Debloat</h2>
+  <ul>
+    <li>Перед пресетом служб нажмите <strong>Бэкап</strong>.</li>
+    <li>Debloat необратим для удалённых UWP — сначала Dry-run.</li>
+    <li>Не отмечайте пункты, помеченные как опасные.</li>
+  </ul>
+
+  <h2>6. Сеть</h2>
+  <div class="card warn">
+    Reset Winsock / TCP/IP требует <strong>перезагрузки ПК</strong>.
+    Меняйте DNS только если понимаете, зачем.
+  </div>
+
+  <h2>7. После прочтения</h2>
+  <div class="card ok">
+    Вернитесь в окно <strong>ShelOptim</strong>. Отметьте все пункты чеклиста и нажмите
+    <strong>«Начать работу»</strong>. Без этого главное меню заблокировано.
+  </div>
+
+  <footer>
+    ShelOptim — portable tool. Используйте на свой риск. Не является официальным продуктом Microsoft.
+  </footer>
+</div>
+</body>
+</html>
